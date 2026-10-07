@@ -1,0 +1,73 @@
+{
+  "info": {
+    "name": "ShopKart Lab 05 - Cart",
+    "_postman_id": "shopkart-lab05-cart",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000" },
+    { "key": "productId", "value": "REPLACE_WITH_PRODUCT_ID" }
+  ],
+  "item": [
+    {
+      "name": "Add product to cart",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": "{{baseUrl}}/cart/{{productId}}"
+      }
+    },
+    {
+      "name": "Add same product again - quantity increments",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": "{{baseUrl}}/cart/{{productId}}"
+      }
+    },
+    {
+      "name": "Get current cart",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/cart"
+      }
+    },
+    {
+      "name": "Update quantity to 3",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"quantity\": 3\n}"
+        },
+        "url": "{{baseUrl}}/cart/{{productId}}"
+      }
+    },
+    {
+      "name": "Exceed stock - expect 400",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"quantity\": 999999\n}"
+        },
+        "url": "{{baseUrl}}/cart/{{productId}}"
+      }
+    },
+    {
+      "name": "Remove product from cart",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/cart/{{productId}}"
+      }
+    }
+  ]
+}

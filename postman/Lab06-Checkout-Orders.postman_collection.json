@@ -1,0 +1,124 @@
+{
+  "info": {
+    "name": "Lab06-Checkout-Orders",
+    "_postman_id": "shopkart-lab06-checkout-orders",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:5000"
+    }
+  ],
+  "item": [
+    {
+      "name": "Create Payment Order",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"shippingAddress\": {\n    \"fullName\": \"Aarav Sharma\",\n    \"phone\": \"9876543210\",\n    \"addressLine1\": \"22 MG Road\",\n    \"city\": \"Bengaluru\",\n    \"state\": \"Karnataka\",\n    \"pincode\": \"560001\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/orders/create-payment-order",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "orders",
+            "create-payment-order"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Verify Payment",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"shopKartOrderId\": \"REPLACE\",\n  \"razorpay_order_id\": \"REPLACE\",\n  \"razorpay_payment_id\": \"REPLACE\",\n  \"razorpay_signature\": \"REPLACE\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/orders/verify-payment",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "orders",
+            "verify-payment"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get My Orders",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/orders",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "orders"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get One Order",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/orders/REPLACE_ORDER_ID",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "orders",
+            "REPLACE_ORDER_ID"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Order - Empty Cart Test",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"shippingAddress\": {\n    \"fullName\": \"Aarav Sharma\",\n    \"phone\": \"9876543210\",\n    \"addressLine1\": \"22 MG Road\",\n    \"city\": \"Bengaluru\",\n    \"state\": \"Karnataka\",\n    \"pincode\": \"560001\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/orders/create-payment-order",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "orders",
+            "create-payment-order"
+          ]
+        }
+      }
+    }
+  ]
+}

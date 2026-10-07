@@ -1,0 +1,13 @@
+$kind: http-request
+name: http://127.0.0.1:5000/customers/login
+description: ""
+url: http://127.0.0.1:5000/customers/login
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "email": "eshikakar@gmail.com",
+      "password": "654321"
+    }
+order: 1790624240024
