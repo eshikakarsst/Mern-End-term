@@ -27,6 +27,13 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
+app.get("/health", (req, res) => {
+    res.status(200).json({
+        status: "ok",
+        message: "ShopKart API is running"
+    });
+});
+
 app.get("/", (req, res) => {
     res.json({
         success: true,
@@ -47,8 +54,8 @@ mongoose
     .then(() => {
         console.log("MongoDB connected");
 
-        app.listen(PORT, () => {
-            console.log(`Server running on http://localhost:${PORT}`);
+        app.listen(PORT, "0.0.0.0", () => {
+        console.log(`Server running on port ${PORT}`);
         });
     })
     .catch((error) => {

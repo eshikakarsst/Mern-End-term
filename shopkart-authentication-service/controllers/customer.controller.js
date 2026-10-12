@@ -1,3 +1,14 @@
+
+const isProduction = process.env.NODE_ENV === "production";
+
+const cookieOptions = {
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "lax",
+    path: "/",
+    maxAge: 24 * 60 * 60 * 1000
+};
+
 const Customer = require("../models/customer.model");
 const bcrypt = require("bcrypt");
 const generateToken = require("../utils/generateToken");
@@ -101,12 +112,7 @@ const loginCustomer = async (req, res) => {
 
         const token = generateToken(customer._id);
 
-        res.cookie("token", token, {
-            httpOnly: true,
-            secure: false,
-            sameSite: "lax",
-            maxAge: 24 * 60 * 60 * 1000
-        });
+        res.cookie("token", token, cookieOptions);
 
         return res.json({
             success: true,
@@ -125,11 +131,14 @@ const getMyProfile = async (req, res) => {
 };
 
 const logoutCustomer = async (req, res) => {
-    res.clearCookie("token", {
-        httpOnly: true,
-        secure: false,
-        sameSite: "lax"
-    });
+    
+res.clearCookie("token", {
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "lax",
+    path: "/"
+});
+
 
     return res.json({
         success: true,
